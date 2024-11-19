@@ -53,13 +53,13 @@ def process_extracted_table_to_dataframe(text):
 results=[]
 # Open the PDF file using pdfplumber
 try:
-    with pdfplumber.open('vital_stats_2022.pdf') as pdf:
+    with pdfplumber.open('vital_stats_2014.pdf') as pdf:
         for i, page in enumerate(pdf.pages):
             text = page.extract_text()
             results.append(text)
             if text:
                 # Check if the page text starts with "Table" followed by a number and contains relevant information
-                if re.match(r'^Table \d+', text.strip()):
+                if re.match(r'^[Tt]able \d+[A-Z]?', text.strip()):
                     # Save the page text to a file
                     with open(f'data/extracted_filtered_table_{i}.txt', 'w') as file:
                         file.write(text)
